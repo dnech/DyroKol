@@ -1,0 +1,14 @@
+# build output
+/bin/
+/dyrokol
+*.exe
+
+# runtime state and secrets (certificates, keys, sealed databases, configs)
+*.enc
+*.crt
+*.key
+*.tmp
+dyrokol.yaml
+dyrokol-server.yaml
+pins.json
+/dist/
