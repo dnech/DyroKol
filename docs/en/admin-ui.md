@@ -224,7 +224,7 @@ errors, rejected handshakes, rejected configurations, restore from a backup. Fil
 
 - **Relay name**: the display name of this relay. It is shown in the top bar of the admin UI (and in the
   browser tab title), which helps when you manage several relays.
-- **Public address**: the domain or IP that agents connect to, with an optional port (default `4443`),
+- **Public address**: the domain or IP that agents connect to, with an optional port (default `7443`),
   for example `relay.example.com`. It is stored in the database and only fills in the agent launch
   command of the **Add machine** dialog; the relay itself does not use it.
 - **Start on boot**: a flag stored in the database; by itself it starts nothing. Autostart is configured

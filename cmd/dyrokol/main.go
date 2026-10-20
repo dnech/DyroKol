@@ -211,7 +211,7 @@ Flags:
   -d, --dir DIR            working directory for defaults (env DYROKOL_DIR)
   -c, --config PATH        server config file, created when missing
                            (default <dir>/dyrokol-server.yaml; env DYROKOL_CONFIG)
-  -l, --listen ADDR        tunnel channel listen address (default :4443; env DYROKOL_LISTEN)
+  -l, --listen ADDR        tunnel channel listen address (default :7443; env DYROKOL_LISTEN)
   -a, --admin ADDR         optional local TCP entrance to the admin ui, e.g. 127.0.0.1:9180
                            (default none: the ui is reachable only through an admin
                            machine's tunnel; env DYROKOL_ADMIN)
@@ -240,7 +240,7 @@ func serverCmd(args []string) {
 	fs := newFlagSet("dyrokol server", func() { serverUsage(os.Stderr) })
 	fs.str(&dirFlag, "d", "dir", "", "working directory for config, db and tls files (env DYROKOL_DIR)")
 	fs.str(&cfgFlag, "c", "config", "", "server config file, created when missing (default <dir>/dyrokol-server.yaml; env DYROKOL_CONFIG)")
-	fs.str(&listen, "l", "listen", "", "tunnel channel listen address (default :4443; env DYROKOL_LISTEN)")
+	fs.str(&listen, "l", "listen", "", "tunnel channel listen address (default :7443; env DYROKOL_LISTEN)")
 	fs.str(&admin, "a", "admin", "", "optional local TCP entrance to the admin ui (default none: only through an admin machine; env DYROKOL_ADMIN)")
 	fs.str(&db, "b", "db", "", "encrypted database file (default <dir>/dyrokol.db.enc; env DYROKOL_DB)")
 	fs.str(&cert, "e", "cert", "", "tls certificate file (default <dir>/dyrokol.crt; env DYROKOL_CERT)")
@@ -323,7 +323,7 @@ Flags:
   -d, --dir DIR            working directory for defaults (env DYROKOL_DIR)
   -c, --config PATH        agent config file, created when missing
                            (default <dir>/dyrokol.yaml; env DYROKOL_CONFIG)
-  -s, --server ADDR        relay address: a domain or an ip, with an optional port (default 4443), e.g. vps.example.com (env DYROKOL_SERVER)
+  -s, --server ADDR        relay address: a domain or an ip, with an optional port (default 7443), e.g. vps.example.com (env DYROKOL_SERVER)
   -t, --token TOKEN        tunnel token (NOT the admin UI token); with --server
                            only, one is registered on the fly (env DYROKOL_TOKEN)
   -p, --db-password PASS   database password for auto-unlock (env DYROKOL_DB_PASSWORD)
@@ -363,7 +363,7 @@ func clientCmd(args []string) {
 	fs := newFlagSet("dyrokol client", func() { clientUsage(os.Stderr) })
 	fs.str(&dirFlag, "d", "dir", "", "working directory for config and pins (env DYROKOL_DIR)")
 	fs.str(&cfgFlag, "c", "config", "", "agent config file, created when missing (default <dir>/dyrokol.yaml; env DYROKOL_CONFIG)")
-	fs.str(&serverAddr, "s", "server", "", "relay address: a domain or an ip, with an optional port (default 4443), e.g. vps.example.com (env DYROKOL_SERVER)")
+	fs.str(&serverAddr, "s", "server", "", "relay address: a domain or an ip, with an optional port (default 7443), e.g. vps.example.com (env DYROKOL_SERVER)")
 	fs.str(&token, "t", "token", "", "tunnel token; with --server only, one is registered on the fly (env DYROKOL_TOKEN)")
 	fs.str(&dbPass, "p", "db-password", "", "database password for auto-unlock (env DYROKOL_DB_PASSWORD)")
 	fs.str(&adminListen, "a", "admin-listen", "", "local admin ui address; default 127.0.0.1:9181 for the admin role (env DYROKOL_ADMIN_LISTEN)")

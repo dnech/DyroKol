@@ -9,10 +9,10 @@
 
 | Сообщение | Причина и решение |
 | --- | --- |
-| `dial: … connection refused` / `i/o timeout` | Relay недоступен: не запущен, закрыт порт в фаерволе, неверный адрес/порт. Проверьте `nc -vz vps.example.com 4443`. |
+| `dial: … connection refused` / `i/o timeout` | Relay недоступен: не запущен, закрыт порт в фаерволе, неверный адрес/порт. Проверьте `nc -vz vps.example.com 7443`. |
 | `dial: transport: certificate pin mismatch for … got … want …` | Сертификат relay изменился (пересоздан или вы подключились к другому серверу). Если смена **ожидаема** — удалите запись об адресе в `pins.json` (или поправьте `tls_pin`). Если нет — это может быть подмена: проверьте отпечаток в логе relay. |
 | `server error (locked): database is locked` | Relay перезапущен, а подключившийся агент не прислал пароль базы. Подключите агента с `db_password` (обычно админ-машину); остальные подтянутся после разблокировки. |
-| `server error (locked): no database; register a machine first …` | На relay ещё нет базы. Зарегистрируйте первую машину: `dyrokol client --server host:4443`. |
+| `server error (locked): no database; register a machine first …` | На relay ещё нет базы. Зарегистрируйте первую машину: `dyrokol client --server host:7443`. |
 | `server error (unauthorized): bad database password` | Пароль базы в конфиге агента неверный (например, после [переноса relay](deployment.md#перенос-relay-на-другой-сервер)). |
 | `server error (unauthorized): unknown token` | Машина удалена или её токен перевыпущен. Возьмите актуальный токен (**Machines → Regenerate token**). |
 | `client: …dyrokol.yaml: server #1 still has the placeholder values` | Конфиг агента создан с заглушками (`dyrokol client --init`, установщик, `service install client`). Впишите адрес relay и токен этой машины (**Machines → Add machine**). |

@@ -262,7 +262,7 @@ type Settings struct {
 	// Name is the display name of this relay, shown in the admin UI header.
 	Name string `json:"name"`
 	// PublicAddr is the address agents use to reach the relay: a domain or an
-	// IP, with an optional port (default 4443). It only fills in the client
+	// IP, with an optional port (default 7443). It only fills in the client
 	// command shown in the admin UI; the relay itself never uses it.
 	PublicAddr string `json:"public_addr"`
 }

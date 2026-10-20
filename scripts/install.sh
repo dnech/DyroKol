@@ -127,7 +127,7 @@ if [[ $TERMUX -eq 1 ]]; then
   cat <<MSG
 
 Done. Register this device:
-  dyrokol client --server your-vps.example.com:4443
+  dyrokol client --server your-vps.example.com:7443
 To start on boot install Termux:Boot (see docs/en/deployment.md).
 MSG
   exit 0
@@ -138,7 +138,7 @@ if [[ -z "$ROLE" ]]; then
 
 Done. Run it manually:
   dyrokol server                       # relay on a public host
-  dyrokol client --server host:4443    # agent
+  dyrokol client --server host:7443    # agent
 or install as a service:  re-run with --role server|client
 MSG
   exit 0
@@ -181,8 +181,8 @@ if [[ $ROLE == server ]]; then
   systemctl enable --now dyrokol-server
   cat <<MSG
 
-Relay is running (journalctl -u dyrokol-server -f). Open TCP port 4443 in the firewall,
-then register the first machine:  dyrokol client --server <this-host>:4443
+Relay is running (journalctl -u dyrokol-server -f). Open TCP port 7443 in the firewall,
+then register the first machine:  dyrokol client --server <this-host>:7443
 MSG
 else
   # a machine of an already activated relay only needs its token: leave a config

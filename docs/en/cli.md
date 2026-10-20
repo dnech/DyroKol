@@ -56,7 +56,7 @@ dyrokol server [flags]
 | --- | --- | --- | --- |
 | `-d`, `--dir DIR` | `DYROKOL_DIR` | `~/.config/dyrokol` | data directory |
 | `-c`, `--config PATH` | `DYROKOL_CONFIG` | `<dir>/dyrokol-server.yaml` | configuration file; created if missing |
-| `-l`, `--listen ADDR` | `DYROKOL_LISTEN` | `:4443` | address of the tunnel port (TLS) used by agents |
+| `-l`, `--listen ADDR` | `DYROKOL_LISTEN` | `:7443` | address of the tunnel port (TLS) used by agents |
 | `-a`, `--admin ADDR` | `DYROKOL_ADMIN` | none | optional local TCP entrance to the admin UI, e.g. `127.0.0.1:9180`. By default no admin port is opened: the UI is reachable only through an admin machine |
 | `-b`, `--db PATH` | `DYROKOL_DB` | `<dir>/dyrokol.db.enc` | encrypted database |
 | `-e`, `--cert PATH` | `DYROKOL_CERT` | `<dir>/dyrokol.crt` | TLS certificate |
@@ -87,7 +87,7 @@ Created on first run with default values; flags and environment variables do **n
 only override it for the duration of the run.
 
 ```yaml
-listen: :4443                 # tunnel port for agents
+listen: :7443                 # tunnel port for agents
 # admin: 127.0.0.1:9180       # optional local entrance to the admin UI (off by default; keep it on loopback)
 db: dyrokol.db.enc            # relative paths are taken from the data directory
 cert: dyrokol.crt
@@ -115,7 +115,7 @@ dyrokol client [flags]
 | --- | --- | --- | --- |
 | `-d`, `--dir DIR` | `DYROKOL_DIR` | `~/.config/dyrokol` | data directory |
 | `-c`, `--config PATH` | `DYROKOL_CONFIG` | `<dir>/dyrokol.yaml` | agent configuration |
-| `-s`, `--server ADDR` | `DYROKOL_SERVER` | — | relay address: a domain or an IP, with an optional port (default `4443`), for example `vps.example.com` or `203.0.113.5:4443`; a leading `https://` is ignored |
+| `-s`, `--server ADDR` | `DYROKOL_SERVER` | — | relay address: a domain or an IP, with an optional port (default `7443`), for example `vps.example.com` or `203.0.113.5:7443`; a leading `https://` is ignored |
 | `-t`, `--token TOKEN` | `DYROKOL_TOKEN` | — | this machine's **tunnel** token (not the admin token) |
 | `-p`, `--db-password PASS` | `DYROKOL_DB_PASSWORD` | — | database password for automatic relay unlock; needed only by a machine that should unlock the relay after a restart (typically the admin machine) |
 | `-a`, `--admin-listen ADDR` | `DYROKOL_ADMIN_LISTEN` | `127.0.0.1:9181` | local admin UI address (admin role only). A bare port (`9182`) means `127.0.0.1:9182` |
@@ -139,14 +139,14 @@ or written into the agent config by hand.
 
 ```yaml
 servers:
-  - addr: vps.example.com:4443       # relay address
+  - addr: vps.example.com:7443       # relay address
     token: cl_…                      # this machine's tunnel token
     db_password: …                   # database password (optional, see "Security")
     tls_pin: sha256:…                # optional: an explicit fingerprint instead of TOFU
     admin_listen: 127.0.0.1:9181     # optional: where to open the admin UI (admin role); `9182` alone also works.
                                      # Default: 9181 for the first relay, 9182 for the second, and so on
     disable_admin: false             # optional: do not open the admin UI
-  - addr: second-relay.example.org:4443   # several relays are possible
+  - addr: second-relay.example.org:7443   # several relays are possible
     token: cl_…
 ```
 

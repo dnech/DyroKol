@@ -118,12 +118,12 @@ function CreateMachineDialog({ close }) {
 // unlock the relay after a restart, so ordinary machines do not have to hold it.
 function TokenDialog({ close, title, token, name, role }) {
   const admin = role === "admin";
-  const listen = app.get().config?.listen || ":4443";
+  const listen = app.get().config?.listen || ":7443";
   const port = listen.slice(listen.lastIndexOf(":") + 1);
   const publicAddr = app.get().status?.public_addr || "";
-  // an address without a port means the default 4443; add the real port when the relay listens elsewhere
+  // an address without a port means the default 7443; add the real port when the relay listens elsewhere
   const host = !publicAddr ? `RELAY_HOST:${port}`
-    : /:\d+$/.test(publicAddr) || port === "4443" ? publicAddr : `${publicAddr}:${port}`;
+    : /:\d+$/.test(publicAddr) || port === "7443" ? publicAddr : `${publicAddr}:${port}`;
   const cmd = `dyrokol client --server ${host} --token ${token}${admin ? " --db-password DB_PASSWORD" : ""}`;
   const where = publicAddr ? "" : "Replace RELAY_HOST with this relay's public address (a domain or an ip; set it once in Settings). ";
   return html`<${Dialog} title=${title} onClose=${() => close()}

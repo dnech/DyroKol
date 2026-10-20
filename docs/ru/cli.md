@@ -56,7 +56,7 @@ dyrokol server [флаги]
 | --- | --- | --- | --- |
 | `-d`, `--dir DIR` | `DYROKOL_DIR` | `~/.config/dyrokol` | каталог данных |
 | `-c`, `--config PATH` | `DYROKOL_CONFIG` | `<dir>/dyrokol-server.yaml` | файл конфигурации; создаётся, если его нет |
-| `-l`, `--listen ADDR` | `DYROKOL_LISTEN` | `:4443` | адрес туннельного порта (TLS), его используют агенты |
+| `-l`, `--listen ADDR` | `DYROKOL_LISTEN` | `:7443` | адрес туннельного порта (TLS), его используют агенты |
 | `-a`, `--admin ADDR` | `DYROKOL_ADMIN` | нет | необязательный локальный TCP-вход в админку, например `127.0.0.1:9180`. По умолчанию админ-порт не открывается: админка доступна только через админ-машину |
 | `-b`, `--db PATH` | `DYROKOL_DB` | `<dir>/dyrokol.db.enc` | зашифрованная база |
 | `-e`, `--cert PATH` | `DYROKOL_CERT` | `<dir>/dyrokol.crt` | TLS-сертификат |
@@ -87,7 +87,7 @@ dyrokol server [флаги]
 **не** изменяют, а лишь переопределяют на время запуска.
 
 ```yaml
-listen: :4443                 # туннельный порт для агентов
+listen: :7443                 # туннельный порт для агентов
 # admin: 127.0.0.1:9180       # необязательный локальный вход в админку (по умолчанию выкл.; только loopback)
 db: dyrokol.db.enc            # относительные пути считаются от каталога данных
 cert: dyrokol.crt
@@ -115,7 +115,7 @@ dyrokol client [флаги]
 | --- | --- | --- | --- |
 | `-d`, `--dir DIR` | `DYROKOL_DIR` | `~/.config/dyrokol` | каталог данных |
 | `-c`, `--config PATH` | `DYROKOL_CONFIG` | `<dir>/dyrokol.yaml` | конфигурация агента |
-| `-s`, `--server ADDR` | `DYROKOL_SERVER` | — | адрес relay: домен или IP, порт необязателен (по умолчанию `4443`), например `vps.example.com` или `203.0.113.5:4443`; префикс `https://` игнорируется |
+| `-s`, `--server ADDR` | `DYROKOL_SERVER` | — | адрес relay: домен или IP, порт необязателен (по умолчанию `7443`), например `vps.example.com` или `203.0.113.5:7443`; префикс `https://` игнорируется |
 | `-t`, `--token TOKEN` | `DYROKOL_TOKEN` | — | токен **туннеля** этой машины (не токен админки) |
 | `-p`, `--db-password PASS` | `DYROKOL_DB_PASSWORD` | — | пароль базы для автоматической разблокировки relay; нужен только машине, которая должна разблокировать relay после перезапуска (обычно админ-машине) |
 | `-a`, `--admin-listen ADDR` | `DYROKOL_ADMIN_LISTEN` | `127.0.0.1:9181` | локальный адрес админки (только для роли admin). Просто порт (`9182`) означает `127.0.0.1:9182` |
@@ -139,14 +139,14 @@ dyrokol client [флаги]
 
 ```yaml
 servers:
-  - addr: vps.example.com:4443       # адрес relay
+  - addr: vps.example.com:7443       # адрес relay
     token: cl_…                      # токен туннеля этой машины
     db_password: …                   # пароль базы (необязательно, см. «Безопасность»)
     tls_pin: sha256:…                # необязательно: явный отпечаток вместо TOFU
     admin_listen: 127.0.0.1:9181     # необязательно: где открыть админку (роль admin); можно просто `9182`.
                                      # По умолчанию: 9181 для первого relay, 9182 для второго и т.д.
     disable_admin: false             # необязательно: не открывать админку
-  - addr: second-relay.example.org:4443   # можно несколько relay
+  - addr: second-relay.example.org:7443   # можно несколько relay
     token: cl_…
 ```
 

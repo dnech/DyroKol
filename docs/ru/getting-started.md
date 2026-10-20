@@ -6,7 +6,7 @@
 
 ## Что понадобится
 
-- **Relay**: машина с публичным IP или доменом, на которой можно открыть TCP-порт `4443`.
+- **Relay**: машина с публичным IP или доменом, на которой можно открыть TCP-порт `7443`.
   Подойдёт самый дешёвый VPS.
 - **Хотя бы одна машина-агент**: любой компьютер или устройство с выходом в интернет.
 - Бинарник `dyrokol` под нужную платформу (см. [таблицу в README](../../README.md#сборки)).
@@ -26,18 +26,18 @@ chmod +x dyrokol
 
 ```
 server: created default config /root/.config/dyrokol/dyrokol-server.yaml
-dyrokol server listening on :4443 (tls pin sha256:454c8c0b…); database locked, waiting for an agent
+dyrokol server listening on :7443 (tls pin sha256:454c8c0b…); database locked, waiting for an agent
 ```
 
 Что произошло:
 
 - создан конфиг, самоподписанный TLS-сертификат и ключ (в `~/.config/dyrokol`);
-- relay слушает туннельный порт `:4443`;
+- relay слушает туннельный порт `:7443`;
 - **база данных ещё не существует и заблокирована**: админка и порты появятся, когда подключится
   первая машина;
 - сгенерирован токен админ-API (если вы не задали свой — см. [CLI](cli.md#relay-dyrokol-server)).
 
-Откройте TCP-порт `4443` на VPS (фаервол провайдера и `ufw`/`iptables`). Админку наружу
+Откройте TCP-порт `7443` на VPS (фаервол провайдера и `ufw`/`iptables`). Админку наружу
 открывать **не нужно**: она слушает только `127.0.0.1`.
 
 Для постоянной работы настройте службу — см. [Развёртывание](deployment.md#systemd-relay).
@@ -47,22 +47,22 @@ dyrokol server listening on :4443 (tls pin sha256:454c8c0b…); database locked,
 На машине, с которой вы будете управлять сетью (обычно ноутбук или домашний сервер):
 
 ```bash
-./dyrokol client --server vps.example.com:4443
+./dyrokol client --server vps.example.com:7443
 ```
 
 Вывод:
 
 ```
-Machine registered on vps.example.com:4443.
+Machine registered on vps.example.com:7443.
 
   tunnel token:  adm_…
   db password:   …
   config:        /home/me/.config/dyrokol/dyrokol.yaml
   admin ui:      http://127.0.0.1:9181 (this machine holds the admin role)
 …
-2026/10/17 03:09:45 [vps.example.com:4443] admin ui available at http://127.0.0.1:9181
-2026/10/17 03:09:45 [vps.example.com:4443] admin ui token: api_…
-2026/10/17 03:09:45 [vps.example.com:4443] connected, role=admin
+2026/10/17 03:09:45 [vps.example.com:7443] admin ui available at http://127.0.0.1:9181
+2026/10/17 03:09:45 [vps.example.com:7443] admin ui token: api_…
+2026/10/17 03:09:45 [vps.example.com:7443] connected, role=admin
 ```
 
 Что произошло:
@@ -108,7 +108,7 @@ Machine registered on vps.example.com:4443.
 Скопируйте токен (он больше не покажется) и команду запуска. На NAS:
 
 ```bash
-./dyrokol client --server vps.example.com:4443 --token cl_…
+./dyrokol client --server vps.example.com:7443 --token cl_…
 ```
 
 Пароль базы здесь не нужен: он лишь разблокирует relay после перезапуска, и первая подключившаяся с ним
@@ -122,7 +122,7 @@ Machine registered on vps.example.com:4443.
 ```yaml
 # ~/.config/dyrokol/dyrokol.yaml
 servers:
-  - addr: vps.example.com:4443
+  - addr: vps.example.com:7443
     token: cl_…
     db_password: …      # нужен только если relay может оказаться заблокированным, см. ниже
 ```

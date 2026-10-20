@@ -41,7 +41,7 @@ contains secrets.
   "version": "1.0.0",
   "protocol": 4,
   "admin_addr": "",            // the optional local TCP entrance; empty by default
-  "listen": ":4443",
+  "listen": ":7443",
   "fingerprint": "sha256:…",
   "api_header": "X-Dyrokol-Api",
   "db_file": "/root/.config/dyrokol/dyrokol.db.enc",
@@ -122,7 +122,7 @@ Full topology snapshot. This is what the web UI renders.
 {
   "id": 1,
   "machine": "relay",          // "relay" or a key_hash
-  "port": 8443,
+  "port": 9000,
   "label": "web",
   "allow": [], "deny": ["127.0.0.0/8"],
   "created_at": 1730000000,
@@ -134,7 +134,7 @@ Full topology snapshot. This is what the web UI renders.
   "target": "relay → example.com:443",
   "endpoint_online": true,
   "active": 2,
-  "bind_error": "listen tcp :8443: bind: address already in use"
+  "bind_error": "listen tcp :9000: bind: address already in use"
 }
 ```
 

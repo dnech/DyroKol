@@ -9,10 +9,10 @@ The agent log has a line like `[address] session: …`:
 
 | Message | Cause and solution |
 | --- | --- |
-| `dial: … connection refused` / `i/o timeout` | The relay is unreachable: not running, the port is closed in a firewall, or the address/port is wrong. Check with `nc -vz vps.example.com 4443`. |
+| `dial: … connection refused` / `i/o timeout` | The relay is unreachable: not running, the port is closed in a firewall, or the address/port is wrong. Check with `nc -vz vps.example.com 7443`. |
 | `dial: transport: certificate pin mismatch for … got … want …` | The relay certificate changed (it was recreated or you connected to a different server). If the change is **expected**, delete the address entry in `pins.json` (or fix `tls_pin`). If not, it may be a substitution: check the fingerprint in the relay log. |
 | `server error (locked): database is locked` | The relay was restarted and the connecting agent did not send the database password. Connect an agent with `db_password` (usually the admin machine); the rest will follow after the unlock. |
-| `server error (locked): no database; register a machine first …` | The relay has no database yet. Register the first machine: `dyrokol client --server host:4443`. |
+| `server error (locked): no database; register a machine first …` | The relay has no database yet. Register the first machine: `dyrokol client --server host:7443`. |
 | `server error (unauthorized): bad database password` | The database password in the agent config is wrong (for example, after [moving the relay](deployment.md#moving-the-relay-to-another-server)). |
 | `server error (unauthorized): unknown token` | The machine was deleted or its token reissued. Get the current token (**Machines → Regenerate token**). |
 | `client: …dyrokol.yaml: server #1 still has the placeholder values` | The agent config was created with placeholders (`dyrokol client --init`, the installer, `service install client`). Put in the relay address and this machine's token (**Machines → Add machine**). |

@@ -6,7 +6,7 @@ scenarios. The terms ("machine", "ingress port", "egress port") are explained in
 
 ## What you need
 
-- **The relay**: a machine with a public IP or domain name where you can open TCP port `4443`.
+- **The relay**: a machine with a public IP or domain name where you can open TCP port `7443`.
   The cheapest VPS will do.
 - **At least one agent machine**: any computer or device with Internet access.
 - The `dyrokol` binary for your platform (download it from the
@@ -28,18 +28,18 @@ You will see:
 
 ```
 server: created default config /root/.config/dyrokol/dyrokol-server.yaml
-dyrokol server listening on :4443 (tls pin sha256:454c8c0b…); database locked, waiting for an agent
+dyrokol server listening on :7443 (tls pin sha256:454c8c0b…); database locked, waiting for an agent
 ```
 
 What happened:
 
 - a config, a self-signed TLS certificate and its key were created (in `~/.config/dyrokol`);
-- the relay listens on the tunnel port `:4443`;
+- the relay listens on the tunnel port `:7443`;
 - **the database does not exist yet and is locked**: the admin UI and the ports appear when the
   first machine connects;
 - an admin API token was generated (unless you set your own, see [CLI](cli.md#the-relay-dyrokol-server)).
 
-Open TCP port `4443` on the VPS (the provider's firewall and `ufw`/`iptables`). You do **not**
+Open TCP port `7443` on the VPS (the provider's firewall and `ufw`/`iptables`). You do **not**
 need to expose the admin UI: it listens on `127.0.0.1` only.
 
 For permanent operation set up a service, see [Deployment](deployment.md#systemd-the-relay).
@@ -49,22 +49,22 @@ For permanent operation set up a service, see [Deployment](deployment.md#systemd
 On the machine you will manage the network from (usually a laptop or a home server):
 
 ```bash
-./dyrokol client --server vps.example.com:4443
+./dyrokol client --server vps.example.com:7443
 ```
 
 Output:
 
 ```
-Machine registered on vps.example.com:4443.
+Machine registered on vps.example.com:7443.
 
   tunnel token:  adm_…
   db password:   …
   config:        /home/me/.config/dyrokol/dyrokol.yaml
   admin ui:      http://127.0.0.1:9181 (this machine holds the admin role)
 …
-2026/10/17 03:09:45 [vps.example.com:4443] admin ui available at http://127.0.0.1:9181
-2026/10/17 03:09:45 [vps.example.com:4443] admin ui token: api_…
-2026/10/17 03:09:45 [vps.example.com:4443] connected, role=admin
+2026/10/17 03:09:45 [vps.example.com:7443] admin ui available at http://127.0.0.1:9181
+2026/10/17 03:09:45 [vps.example.com:7443] admin ui token: api_…
+2026/10/17 03:09:45 [vps.example.com:7443] connected, role=admin
 ```
 
 What happened:
@@ -110,7 +110,7 @@ steps (a port without a route, an offline machine, a bind error).
 Copy the token (it will not be shown again) and the launch command. On the NAS:
 
 ```bash
-./dyrokol client --server vps.example.com:4443 --token cl_…
+./dyrokol client --server vps.example.com:7443 --token cl_…
 ```
 
 The database password is not needed here: it only unlocks the relay after a restart, and the first machine
@@ -124,7 +124,7 @@ config in place:
 ```yaml
 # ~/.config/dyrokol/dyrokol.yaml
 servers:
-  - addr: vps.example.com:4443
+  - addr: vps.example.com:7443
     token: cl_…
     db_password: …      # only needed if the relay may be locked, see below
 ```

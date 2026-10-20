@@ -140,15 +140,15 @@ func TestReportDrainsCounters(t *testing.T) {
 
 func TestNormalizeAddr(t *testing.T) {
 	for in, want := range map[string]string{
-		"relay.example.com":           "relay.example.com:4443",
+		"relay.example.com":           "relay.example.com:7443",
 		"relay.example.com:5000":      "relay.example.com:5000",
-		"203.0.113.5":                 "203.0.113.5:4443",
-		"203.0.113.5:4443":            "203.0.113.5:4443",
-		" https://relay.example.com/": "relay.example.com:4443",
+		"203.0.113.5":                 "203.0.113.5:7443",
+		"203.0.113.5:7443":            "203.0.113.5:7443",
+		" https://relay.example.com/": "relay.example.com:7443",
 		"tcp://relay.example.com:81":  "relay.example.com:81",
-		"::1":                         "[::1]:4443",
+		"::1":                         "[::1]:7443",
 		"[::1]:9":                     "[::1]:9",
-		"relay.example.com:":          "relay.example.com:4443",
+		"relay.example.com:":          "relay.example.com:7443",
 		"":                            "",
 	} {
 		if got := NormalizeAddr(in); got != want {
@@ -178,7 +178,7 @@ func TestConfigTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	cfg, _ = LoadConfig(path)
-	if len(cfg.Servers) != 1 || cfg.Servers[0].Addr != "relay.example.org:4443" {
+	if len(cfg.Servers) != 1 || cfg.Servers[0].Addr != "relay.example.org:7443" {
 		t.Fatalf("stub not replaced: %+v", cfg.Servers)
 	}
 	if err := CheckConfig(cfg); err != nil {

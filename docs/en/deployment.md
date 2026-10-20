@@ -4,7 +4,7 @@
 
 | Port | Where | Must it be opened |
 | --- | --- | --- |
-| `4443/tcp` (or your `--listen`) | relay | **Yes**: agents connect here |
+| `7443/tcp` (or your `--listen`) | relay | **Yes**: agents connect here |
 | ingress port numbers on the relay (for example, `8080`) | relay | Yes, if visitors come from outside |
 | the admin UI | relay | **No port at all** by default: it is served only through the admin machine's tunnel (an optional `--admin` entrance, if you enable it, must stay on loopback) |
 | ingress port numbers on agents | agent | Only if they are needed from outside; by default they listen on all interfaces |
@@ -276,7 +276,7 @@ This has no restart after a crash and no log rotation, so it is fine only as a s
 ### Running manually
 
 1. Put `dyrokol.exe` in a directory, for example `C:\dyrokol`.
-2. Run in PowerShell: `.\dyrokol.exe client --server vps.example.com:4443`
+2. Run in PowerShell: `.\dyrokol.exe client --server vps.example.com:7443`
    (or `.\dyrokol.exe server` for the relay).
 
 Files (config, `pins.json`, the relay database) end up in `%USERPROFILE%\.config\dyrokol` or in the folder
@@ -290,7 +290,7 @@ administrator**:
 
 ```powershell
 # Install and start at once
-.\dyrokol.exe service install client --server vps.example.com:4443
+.\dyrokol.exe service install client --server vps.example.com:7443
 .\dyrokol.exe service install server                 # or the relay
 
 # Management
@@ -360,7 +360,7 @@ Use the `dyrokol-termux-arm64` build (or `dyrokol-termux-arm` for 32-bit devices
 
 ```bash
 cp dyrokol-termux-arm64 ~/dyrokol && chmod +x ~/dyrokol
-~/dyrokol client --server vps.example.com:4443
+~/dyrokol client --server vps.example.com:7443
 ```
 
 To keep the agent from sleeping with the screen off, enable `termux-wake-lock` and disable battery
@@ -406,7 +406,7 @@ and the database password change.
 2. Move `dyrokol.crt` and `dyrokol.key` into the new relay's data directory so that the fingerprint does
    not change. Otherwise every agent will have to delete the entry from `pins.json`.
 3. Start the relay on the new server and register a temporary admin machine:
-   `dyrokol client --server new-address:4443`. This creates a **new database with a new password**; the
+   `dyrokol client --server new-address:7443`. This creates a **new database with a new password**; the
    password is in that machine's config (`db_password`).
 4. Open that machine's admin UI and restore the backup (**Settings → Restore**). The temporary machine
    disappears along with the rest of the old configuration, and all agents are disconnected. Stop the

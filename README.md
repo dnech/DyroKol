@@ -117,15 +117,15 @@ curl -fsSL https://raw.githubusercontent.com/dnech/DyroKol/main/scripts/install.
 
 ```bash
 dyrokol server
-# dyrokol server listening on :4443 (tls pin sha256:…); database locked, waiting for an agent
+# dyrokol server listening on :7443 (tls pin sha256:…); database locked, waiting for an agent
 ```
 
-Откройте TCP-порт `4443` в фаерволе VPS.
+Откройте TCP-порт `7443` в фаерволе VPS.
 
 **2. На первой машине зарегистрируйтесь**
 
 ```bash
-dyrokol client --server vps.example.com:4443
+dyrokol client --server vps.example.com:7443
 ```
 
 Команда создаёт базу на relay, выдаёт этой машине роль **admin**, сохраняет конфиг и подключается.
@@ -336,15 +336,15 @@ curl -fsSL https://raw.githubusercontent.com/dnech/DyroKol/main/scripts/install.
 
 ```bash
 dyrokol server
-# dyrokol server listening on :4443 (tls pin sha256:…); database locked, waiting for an agent
+# dyrokol server listening on :7443 (tls pin sha256:…); database locked, waiting for an agent
 ```
 
-Open TCP port `4443` in the VPS firewall.
+Open TCP port `7443` in the VPS firewall.
 
 **2. Register on the first machine**
 
 ```bash
-dyrokol client --server vps.example.com:4443
+dyrokol client --server vps.example.com:7443
 ```
 
 The command creates the database on the relay, gives this machine the **admin** role, saves the config

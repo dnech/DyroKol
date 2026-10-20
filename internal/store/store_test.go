@@ -676,12 +676,12 @@ func TestSettingsNameAndPublicAddr(t *testing.T) {
 	if got.Name != "Frankfurt" || got.PublicAddr != "Relay.Example.com" || !got.Autostart {
 		t.Fatalf("settings: %+v", got)
 	}
-	for _, addr := range []string{"relay.example.com:4443", "203.0.113.5", "203.0.113.5:80", "[::1]:4443", ""} {
+	for _, addr := range []string{"relay.example.com:7443", "203.0.113.5", "203.0.113.5:80", "[::1]:7443", ""} {
 		if err := s.SaveSettings(Settings{PublicAddr: addr}); err != nil {
 			t.Errorf("public address %q rejected: %v", addr, err)
 		}
 	}
-	for _, addr := range []string{"bad host", "host:99999", "host:abc", ":4443", "a/b"} {
+	for _, addr := range []string{"bad host", "host:99999", "host:abc", ":7443", "a/b"} {
 		if err := s.SaveSettings(Settings{PublicAddr: addr}); !errors.Is(err, ErrInvalid) {
 			t.Errorf("public address %q: got %v, want ErrInvalid", addr, err)
 		}

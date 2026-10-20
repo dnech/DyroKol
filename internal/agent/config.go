@@ -26,7 +26,7 @@ type ServerEntry struct {
 }
 
 // DefaultPort is the relay tunnel port used when an address has none.
-const DefaultPort = "4443"
+const DefaultPort = "7443"
 
 // NormalizeAddr turns what an operator typed into host:port: a domain or an ip
 // without a port gets DefaultPort, and a leading scheme (https://, tcp://, ...)
@@ -49,7 +49,7 @@ func NormalizeAddr(addr string) string {
 // Placeholders written by WriteTemplate; a config that still has them is not
 // ready to run.
 const (
-	placeholderAddr  = "YOUR-RELAY-HOST:4443"
+	placeholderAddr  = "YOUR-RELAY-HOST:7443"
 	placeholderToken = "PASTE_TOKEN_HERE"
 )
 
@@ -61,7 +61,7 @@ func (e ServerEntry) isPlaceholder() bool {
 const configTemplate = `# DyroKol agent configuration.
 # Fill in the values below, then start the agent (or its service).
 #
-#   addr         the relay: a domain or an IP, the port is optional (default 4443)
+#   addr         the relay: a domain or an IP, the port is optional (default 7443)
 #   token        this machine's tunnel token (admin UI: Machines -> Add machine)
 #   db_password  only for a machine that should unlock the relay after a restart
 #                (normally the admin machine); ordinary machines leave it out

@@ -44,7 +44,7 @@ type Config struct {
 
 // Defaults.
 const (
-	DefaultListen = ":4443"
+	DefaultListen = ":7443"
 
 	handshakeTimeout = 15 * time.Second
 	flushInterval    = 5 * time.Second

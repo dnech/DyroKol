@@ -4,7 +4,7 @@
 
 | Порт | Где | Нужно ли открывать |
 | --- | --- | --- |
-| `4443/tcp` (или ваш `--listen`) | relay | **Да**: сюда подключаются агенты |
+| `7443/tcp` (или ваш `--listen`) | relay | **Да**: сюда подключаются агенты |
 | порты входных точек на relay (например, `8080`) | relay | Да, если посетители приходят снаружи |
 | админка | relay | **Порта нет вообще:** она отдаётся только через туннель админ-машины (необязательный вход `--admin`, если включите, должен оставаться на loopback) |
 | порты входных точек на агентах | агент | Только если нужны извне; по умолчанию слушают на всех интерфейсах |
@@ -277,7 +277,7 @@ sudo supervisorctl reread && sudo supervisorctl update
 ### Запуск вручную
 
 1. Положите `dyrokol.exe` в каталог, например `C:\dyrokol`.
-2. Запустите в PowerShell: `.\dyrokol.exe client --server vps.example.com:4443`
+2. Запустите в PowerShell: `.\dyrokol.exe client --server vps.example.com:7443`
    (или `.\dyrokol.exe server` для relay).
 
 Файлы (конфиг, `pins.json`, база relay) окажутся в `%USERPROFILE%\.config\dyrokol` либо в папке,
@@ -291,7 +291,7 @@ sudo supervisorctl reread && sudo supervisorctl update
 
 ```powershell
 # Установить и сразу запустить
-.\dyrokol.exe service install client --server vps.example.com:4443
+.\dyrokol.exe service install client --server vps.example.com:7443
 .\dyrokol.exe service install server                 # или relay
 
 # Управление
@@ -360,7 +360,7 @@ Ctrl+C: relay дописывает статистику и запечатыва�
 
 ```bash
 cp dyrokol-termux-arm64 ~/dyrokol && chmod +x ~/dyrokol
-~/dyrokol client --server vps.example.com:4443
+~/dyrokol client --server vps.example.com:7443
 ```
 
 Чтобы агент не засыпал при выключенном экране, включите `termux-wake-lock` и отключите для Termux
@@ -406,7 +406,7 @@ cp dyrokol-termux-arm64 ~/dyrokol && chmod +x ~/dyrokol
 2. Перенесите `dyrokol.crt` и `dyrokol.key` в каталог данных нового relay, чтобы отпечаток
    не изменился. Иначе каждому агенту придётся удалить запись из `pins.json`.
 3. Запустите relay на новом сервере и зарегистрируйте временную админ-машину:
-   `dyrokol client --server новый-адрес:4443`. Это создаёт **новую базу с новым паролем**;
+   `dyrokol client --server новый-адрес:7443`. Это создаёт **новую базу с новым паролем**;
    пароль лежит в конфиге этой машины (`db_password`).
 4. Откройте админку этой машины и восстановите бэкап (**Settings → Restore**). Временная машина
    исчезнет вместе с остальной старой конфигурацией, а все агенты будут отключены. Остановите

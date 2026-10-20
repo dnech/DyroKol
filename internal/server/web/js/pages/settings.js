@@ -121,7 +121,7 @@ function RelayIdentity({ status }) {
     <${Field} label="Relay name" hint="shown in the header of this admin UI">
       <${Input} value=${name} onInput=${setName} maxlength="200" placeholder="e.g. Frankfurt VPS" />
     <//>
-    <${Field} label="Public address" hint="domain or ip that agents connect to, port optional (default 4443); used in the client command">
+    <${Field} label="Public address" hint="domain or ip that agents connect to, port optional (default 7443); used in the client command">
       <${Input} value=${addr} onInput=${setAddr} maxlength="255" spellcheck="false" placeholder="relay.example.com" />
     <//>
     <div class="button-row"><${Button} type="submit" variant="primary" busy=${busy} disabled=${!dirty}>Save<//></div>
